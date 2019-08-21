@@ -92,9 +92,15 @@ public class TieBaImageBuilder implements TieBaImage{
 
                 //image_emoticon 屏蔽表情
                 if (s.contains("https") && !s.contains("image_emoticon")) {
-                    String name = s.substring(s.lastIndexOf("/")+1);
-                    if (name.contains(".jpg") || name.contains(".png") || name.contains(".gif")) {
-                        HttpUtil.addFile(s,savePath + "/" + id + "/",name);
+                    //贴吧的表情
+                    if(!s.contains("tb2.bdstatic.com")) {
+                        //贴吧发言带的签名图
+                        if (!s.contains("?v=tbs")) {
+                            String name = s.substring(s.lastIndexOf("/")+1);
+                            if (name.contains(".jpg") || name.contains(".png") || name.contains(".gif")) {
+                                HttpUtil.addFile(s,savePath + "/" + id + "/",name);
+                            }
+                        }
                     }
                 }
 
